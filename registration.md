@@ -253,7 +253,17 @@ This describes how we handle the response, after an account has been
 successfully created.
 
 * If the request is `Accept: application/json`, the response should be status
-  200 with an empty body.
+  200 with and a body of this format:
+
+```
+{
+  status: 'UNVERIFIED'
+}
+```
+
+Where status is the status of the account that was just created.  This allows
+the client to know if the UI should render a "check your email for a
+verification link" message
 
 * If the request is `Accept: text/html`, and..
   * The newly created account's status is ENABLED and [AUTO_LOGIN](#AUTO_LOGIN)
