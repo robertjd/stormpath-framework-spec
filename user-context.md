@@ -10,14 +10,14 @@ environment.
 
 ### Configuration Options
 
-This route is enabled by default at the `/me` uri, but this endpoint can be
+This route is enabled by default at the `/me` path, but this endpoint can be
 changed or disabled entirely with these options:
 
 ```yaml
 web:
   me:
     enabled: true
-    uri: "/me"
+    path: "/me"
 ```
 
 ### Endpoint Response

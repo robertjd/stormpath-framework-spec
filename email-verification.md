@@ -9,7 +9,7 @@ facilitate self-service verification of newly registered user accounts.
 
 If the application's default account store has the email verification workflow
 enabled, and `stormpath.web.verify.enabled` is not set to `false`, our library
-MUST intercept incoming requests at `stormpath.web.verify.uri` and follow the
+MUST intercept incoming requests at `stormpath.web.verify.path` and follow the
 request handling procedure that is defined below.
 
 ## Request Handling
@@ -20,7 +20,7 @@ request handling procedure that is defined below.
 
  * Attempt to verify the `sptoken`:
 
-   * If the token is valid, redirect to `stormpath.web.verify.nextUri` and
+   * If the token is valid, redirect to `stormpath.web.verify.nextPath` and
      append `?status=verified`
 
    * If the token is invalid:
@@ -109,8 +109,8 @@ stormpath:
     # workflow enabled.
     verifyEmail:
       enabled: null
-      uri: "/verify"
-      nextUri: "/login"
+      path: "/verify"
+      nextPath: "/login"
       view: "verify"
 ```
 
@@ -126,17 +126,17 @@ application has the email verification workflow enabled.
 <a href="#top">Back to Top</a>
 
 
-#### uri
+#### path
 
 Default: `/verify`
 
-The URI that we'll attach an interceptor to for GET and POST requests, if
+The path that we'll attach an interceptor to for GET and POST requests, if
 `enabled` is `true`.
 
 <a href="#top">Back to Top</a>
 
 
-#### nextUri
+#### nextPath
 
 Default: `/login`
 

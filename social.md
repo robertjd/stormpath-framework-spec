@@ -20,7 +20,7 @@ describe in detail:
 
 In this situation, the user leaves your login page by redirect and is taken to
 the provider for authentication.  Once authentication is complete, the user is
-redirected back to a "callback" URI on your website.  This callback will provide
+redirected back to a "callback" path on your website.  This callback will provide
 an access token or access code as a query parameter.  You server uses a
 confidential keypair of the provider to validate the token/code, then retrieves
 the account data of the authenticated user.
@@ -89,7 +89,7 @@ callback handler must complete the following tasks:
   * Create or update the account in Stormpath, by making a call to the
     `application.getAccount()` method in the SDK of the framework language
   * Create the OAuth2 token cookies for the user
-  * Redirect the user to `stormpath.web.login.nextUri`
+  * Redirect the user to `stormpath.web.login.nextPath`
 
 If any of these tasks fail, an error should be immediately rendered to the user
 and the next task should not be attempted.

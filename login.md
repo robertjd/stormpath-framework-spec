@@ -8,7 +8,7 @@ This document describes the endpoints and logic that must exist in order to
 facilitate self-service login of user accounts.
 
 If enabled by `stormpath.web.login.enabled`, our library MUST intercept incoming
-requests for `stormpath.web.login.uri`.
+requests for `stormpath.web.login.path`.
 
 GET requests must:
 
@@ -37,8 +37,8 @@ stormpath:
   web:
     login:
       enabled: true
-      uri: "/login"
-      nextUri: "/"
+      path: "/login"
+      nextPath: "/"
       view: "login"
 ```
 
@@ -47,28 +47,28 @@ stormpath:
 Default: `true`
 
 If `true` this feature will be enabled and our library will intercept requests
-at for `uri`.
+at for `path`.
 
 If `false` this feature is disabled and the base framework will be responsible
-for the `uri`, likely resulting in a 404 Not Found error.
+for the `path`, likely resulting in a 404 Not Found error.
 
 **NOTE**: If this feature is enabled, and no Account Stores are mapped to this
 Application -- then throw an error during framework initialization as there are
 no possible ways for a user to authenticate.
 
-#### <a name="uri"></a> uri
+#### <a name="path"></a> path
 
 Default: `/login`
 
-This URI that our integration should bind to for handling GET and POST requests
-for the `uri`.
+This path that our integration should bind to for handling GET and POST requests
+for the `path`.
 
-#### <a name="nextUri"></a> nextUri
+#### <a name="nextPath"></a> nextPath
 
 Default: `/`
 
 Where to send the user after successful login.  This value can be overridden on
-a per-request basis, if the parameter `?next=uri` is provide on the POST.
+a per-request basis, if the parameter `?next=path` is provide on the POST.
 
 #### <a name="view"></a> view
 
@@ -244,9 +244,9 @@ successfully authenticated.
 
 **For HTML responses:**
 
-Issue a 302 redirect to the `nextUri` and create a new user session.  If the
-form post had a query parameter of `?next=url`, then redirect to that location
-instead of the defined `nextUri`.
+Issue a 302 redirect to the `nextPath` and create a new user session.  If the
+form post had a query parameter of `?next=path`, then redirect to that location
+instead of the defined `nextPath`.
 
 **For JSON responses:**
 
@@ -280,7 +280,7 @@ is unverified.  Message to show:
 > Your account verification email has been sent!  Before you can log into your
   account, you need to activate your account by clicking the link we sent to
   your inbox.  Didn't get the email?
-  `<a href="#{stormpath.web.verifyEmail.uri}">Click Here</a>`
+  `<a href="#{stormpath.web.verifyEmail.path}">Click Here</a>`
 
 * `?status=verified` - the user has successfully verified their account and can
   now login.  Message to show:

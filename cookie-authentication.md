@@ -136,7 +136,7 @@ cookies over a non-https connection is vulnerable to man-in-the-middle attacks.
 
 #### <a name="path"></a> path
 
-This option determines what URI paths will be able to read the cookie.
+This option determines what paths will be able to read the cookie.
 
 <a href="#top">Back to Top</a>
 

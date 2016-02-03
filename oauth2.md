@@ -16,14 +16,14 @@ The OAuth2 endpoint can be configured, or disabled entirely:
 web:
   oauth2:
     enabled: true
-    uri: "/oauth/token"
+    path: "/oauth/token"
 ```
 
 #### web.oauth2.enabled
 
-By default we accept POSTS to this token uri and respond according to the
+By default we accept POSTS to this token path and respond according to the
 grant type.  If the developer sets this value to false we should not attach any
-handler to this uri, allowing the framework to return it's default 404 response.
+handler to this path, allowing the framework to return it's default 404 response.
 
 If enabled and the grant type is not `client_credentials` or `password`, then we
 should return the OAuth-compliant error code:

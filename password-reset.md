@@ -24,7 +24,7 @@ reset email.
 If the default account store of the stormapth application has the password reset
 workflow enabled, and `stormpath.web.forgotPassword.enabled` is not set to
 `false`, our library MUST intercept incoming requests at
-`stormpath.web.forgotPassword.uri` and follow the request handling procedure
+`stormpath.web.forgotPassword.path` and follow the request handling procedure
 that is defined below.
 
 ### Request Handling
@@ -59,7 +59,7 @@ Regardless of whether or not the email address is associated with a user
 account, we must do the following:
 
 * If the request is `Accept: application/html`, redirect the user to
-  `stormpath.web.forgot.nextUri`
+  `stormpath.web.forgot.nextPath`
 
 * If the request is `Accept: application/json`, respond with `200 OK` and no
   body.
@@ -71,9 +71,9 @@ stormpath:
   web:
     forgotPassword:
       enabled: null
-      uri: "/forgot"
+      path: "/forgot"
       view: "forgot-password"
-      nextUri: "/login?status=forgot"
+      nextPath: "/login?status=forgot"
 ```
 
 #### enabled
@@ -87,21 +87,21 @@ reset workflow enabled.
 <a href="#top">Back to Top</a>
 
 
-#### uri
+#### path
 
 Default: `/forgot`
 
-The URI that we'll attach an interceptor to for requests, if `enabled` is
+The path that we'll attach an interceptor to for requests, if `enabled` is
 `true`.
 
 <a href="#top">Back to Top</a>
 
 
-#### nextUri
+#### nextPath
 
 Default: `/login?status=forgot`
 
-This is the URI we'll redirect the user to after a user has successfully
+This is the path we'll redirect the user to after a user has successfully
 initialized the Password Reset workflow by submitting an email address.
 
 <a href="#top">Back to Top</a>
@@ -132,7 +132,7 @@ this endpoint, and contain the `sptoken` query parameter.
     consume the token yet.
 
   * If the `sptoken` is invalid, redirect the user to
-    `stormpath.web.changePassword.errorUri`.
+    `stormpath.web.changePassword.errorPath`.
 
   * If the `sptoken` is valid:
 
@@ -144,7 +144,7 @@ this endpoint, and contain the `sptoken` query parameter.
 
 * If there isn't a `?sptoken` query parameter in the URL:
 
-  * Redirect the user to `stormpath.web.forgotPassword.uri`
+  * Redirect the user to `stormpath.web.forgotPassword.path`
 
 #### POST Handling
 
@@ -170,10 +170,10 @@ appropriate case:
 * If the request is `Accept: text/html`:
 
   * If `autoLogin` is `false`, redirect the user to
-    `stormpath.web.changePassword.nextUri`
+    `stormpath.web.changePassword.nextPath`
 
   * If `autoLogin` is `true`, log the user in (create the Oauth2 cookies) and
-    redirect the user to `stormpath.web.login.nextUri`
+    redirect the user to `stormpath.web.login.nextPath`
 
 * If the request is `Accept: application/json`:
 
@@ -203,7 +203,7 @@ If an error is encountered, respond with the appropriate case:
     password form and display the error to the user
 
   * If the error is an invalid or expired token error, redirect the user to
-    `stormpath.web.changePassword.errorUri`
+    `stormpath.web.changePassword.errorPath`
 
 * If the request is `Accept: application/json`:
 
@@ -227,9 +227,9 @@ stormpath:
     changePassword:
       enabled: null
       autoLogin: false
-      uri: "/change"
-      errorUri: "/forgot?status=invalid_sptoken"
-      nextUri: "/login?status=reset"
+      path: "/change"
+      errorPath: "/forgot?status=invalid_sptoken"
+      nextPath: "/login?status=reset"
       view: "change-password"
 
 ```
@@ -252,37 +252,37 @@ reset workflow enabled.
 Default: `false`
 
 If `true`, then once a user has successfully reset their password, they will be
-automatically logged in and redirected to `stormpath.web.login.nextUri`.
+automatically logged in and redirected to `stormpath.web.login.nextPath`.
 
 
 <a href="#top">Back to Top</a>
 
 
-#### uri
+#### path
 
 Default: `/change`
 
-The URI that we'll attach an interceptor to for requests, if `enabled` is
+The path that we'll attach an interceptor to for requests, if `enabled` is
 `true`.
 
 <a href="#top">Back to Top</a>
 
 
-#### <a name="change-error-uri"></a> errorUri
+#### <a name="change-error-path"></a> errorPath
 
 Default: `/forgot?status=invalid_sptoken`
 
-This is the URI we'll redirect a user to if they have arrived with an invalid
+This is the path we'll redirect a user to if they have arrived with an invalid
 `sptoken`.
 
 <a href="#top">Back to Top</a>
 
 
-#### nextUri
+#### nextPath
 
 Default: `/login?status=reset`
 
-This is the URI we'll redirect the user to after they have successfully reset
+This is the path we'll redirect the user to after they have successfully reset
 their account password.
 
 <a href="#top">Back to Top</a>

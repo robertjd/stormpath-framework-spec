@@ -9,7 +9,7 @@ This document describes the endpoints and logic that must exist in order to
 facilitate self-service registration of user accounts.
 
 If enabled by `stormpath.web.register.enabled`, our library MUST intercept
-incoming requests for `stormpath.web.register.uri`.
+incoming requests for `stormpath.web.register.path`.
 
 GET requests must respond in one of the following ways:
 
@@ -62,8 +62,8 @@ stormpath:
   web:
     register:
       enabled: true
-      uri: "/register"
-      nextUri: "/"
+      path: "/register"
+      nextPath: "/"
       autoLogin: false
       # autoLogin is possible only if the email verification feature is disabled
       # on the default default account store of the defined Stormpath
@@ -129,18 +129,18 @@ stormpath:
 Default: `true`
 
 This determines if the integration will handle the registration route, defined
-by `stormpath.web.registration.uri`
+by `stormpath.web.registration.path`
 
 
-#### <a name="uri"></a> uri
+#### <a name="path"></a> path
 
 Default: `/register`
 
-This URI that our integration should bind to for handling GET and POST requests
-for the `uri`.
+This path that our integration should bind to for handling GET and POST requests
+for the `path`.
 
 
-#### <a name="nextUri"></a> nextUri
+#### <a name="nextPath"></a> nextPath
 
 Default: `/`
 
@@ -151,7 +151,7 @@ is `True`.
 #### <a name="autoLogin"></a> autoLogin
 
 If enabled, the user should be automatically logged in and redirected to the
-`nextUri` after a successful registration.  This is only possible if the
+`nextPath` after a successful registration.  This is only possible if the
 default account store for the application has the email verification workflow
 disabled.
 
@@ -388,13 +388,13 @@ Content-Type: application/json; charset=utf-8
 * If the request is `Accept: text/html`, and..
   * The newly created account's status is ENABLED and [autoLogin](#autoLogin)
     is:
-    * `True`: issue a 302 Redirect to the `nextUri` and log the user in (create
+    * `True`: issue a 302 Redirect to the `nextPath` and log the user in (create
       the OAuth2 token cookies).
-    * `False`: 302 redirect the user to `stormpath.web.login.uri`, and append
+    * `False`: 302 redirect the user to `stormpath.web.login.path`, and append
       the query parameter `?status=created` (see [login page status messages][]).
 
   * The newly created account status is UNVERIFIED, then 302 redirect the user
-    to `stormpath.web.login.uri` and append the query parameter
+    to `stormpath.web.login.path` and append the query parameter
     `?status=unverified` (see [login page status messages][]).
 
 <a href="#top">Back to Top</a>
